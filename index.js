@@ -22,6 +22,10 @@ const jsonM ={
 app.get('/daffodils', function(req, res){
 res.json(jsonM)
 });
+app.post('/daffodils', function(req, res){
+    var Userdata = req.body;
+    res.json(Userdata);
+    });
 app.listen(3001,()=>{
     console.log('listening on');
 })
