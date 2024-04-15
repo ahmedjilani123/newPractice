@@ -14,7 +14,7 @@ const jsonM ={
       "gender":"Male"
       },
        {
-      "user":"joshi sir",
+      "user":"Karan",
       "age":26,
       "gender":"Male"
       }
@@ -23,9 +23,9 @@ const jsonM ={
 app.get('/daffodils', function(req, res){
 res.json(jsonM)
 });
-app.post('/daffodils', function(req, res){
+app.post('/daffodil', function(req, res){
     var Userdata = req.body;
-    res.json(Userdata);
+    res.json({Message:"Your Name is :"+Userdata.name});
     });
 app.listen(3001,()=>{
     console.log('listening on');
