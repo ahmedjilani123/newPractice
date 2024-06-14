@@ -1,33 +1,27 @@
 const express = require('express');
 const app = express();
+const cors=require("cors");
+const mongoose = require('mongoose');
+mongoose.connect(process.env.DATABASE)
+const env = require("dotenv").config();
+const Data = require("./Schema");
+app.use(cors({
+  "origin":"*"
+}))
+const port=process.env.PORT || 3000;
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-const jsonM ={
-    "data":[
-      {
-      "user":"Zaid",
-      "age":20,
-      "gender":"Male"
-      },
-       {
-      "user":"Dev",
-      "age":20,
-      "gender":"Male"
-      },
-       {
-      "user":"Karan",
-      "age":26,
-      "gender":"Male"
-      }
-    ]
-  }
-app.get('/daffodils', function(req, res){
-res.json(jsonM)
+
+app.get('/daffodils', async function(req, res){
+  var data = await Data.find();
+res.json(data);
 });
-app.post('/daffodil', function(req, res){
+app.post('/daffodil',async function(req, res){
     var Userdata = req.body;
-    res.json({Message:"Your Name is :"+Userdata.name});
+    await Data.create(Userdata);
+    res.json({"Message":"Created"});
     });
-app.listen(3001,()=>{
+app.listen(port,()=>{
     console.log('listening on');
 })
