@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const UserSubmit = new Schema({
-    Name:{
+    First_Name:{
         type:String
     },
     Email:{
