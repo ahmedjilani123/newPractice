@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
+const env = require("dotenv").config();
 const cors=require("cors");
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE)
-const env = require("dotenv").config();
 const Data = require("./Schema");
 app.use(cors({
   "origin":"*"
-}))
+}));
 const port=process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: true}));
