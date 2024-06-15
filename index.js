@@ -19,6 +19,7 @@ res.json(data);
 });
 app.post('/daffodil',async function(req, res){
     var Userdata = req.body;
+    console.log(Userdata);
     await Data.create(Userdata);
     res.json({"Message":"Created"});
     });
