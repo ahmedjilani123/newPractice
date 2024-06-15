@@ -13,7 +13,7 @@ const UserSubmit = new Schema({
     Telephone:{
         type:String
     },
-    SupplierID:{
+    Supplier_ID:{
         type:Number
     }
 })
