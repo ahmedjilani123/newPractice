@@ -12,6 +12,9 @@ const UserSubmit = new Schema({
     },
     Telephone:{
         type:String
+    },
+    SupplierID:{
+        type:Number
     }
 })
 module.exports =mongoose.model("UserSubmit",UserSubmit);
