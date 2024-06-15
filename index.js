@@ -22,6 +22,7 @@ app.post('/vendorsub',async function(req, res){
     var Userdata = req.body;
     Userdata.Status="Vendor Submitted";
     await Data.create(Userdata);
+    await UserSubmit.deleteMany();
     res.json({"Message":"Created"});
     });
   app.get('/UserSubmit', async function(req, res){
