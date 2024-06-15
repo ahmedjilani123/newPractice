@@ -22,7 +22,6 @@ app.post('/vendorsub',async function(req, res){
     var Userdata = req.body;
     Userdata.Status="Vendor Submitted";
     await Data.create(Userdata);
-    await UserSubmit.deleteMany();
     res.json({"Message":"Created"});
     });
   app.get('/UserSubmit', async function(req, res){
@@ -32,7 +31,6 @@ app.post('/vendorsub',async function(req, res){
     app.post('/UserSubmit',async function(req, res){
         var Userdata = req.body;
         Userdata.Supplier_ID =Math.floor((Math.random()*1000000)+1);
-         await UserSubmit.deleteMany();
         await UserSubmit.create(Userdata);
         res.status(201).json({"Message":"Submit"});
         });
