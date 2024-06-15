@@ -458,6 +458,9 @@ CheckDigit
         :
     {
         type: String
+    },
+    Status:{
+        type: String
     }
 
 })
