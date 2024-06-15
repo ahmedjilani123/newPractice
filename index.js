@@ -14,12 +14,12 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.get('/daffodils', async function(req, res){
-  //var data = await Data.find();
-res.json({"hello":"de"});
+  var data = await Data.find();
+res.json(data);
 });
 app.post('/daffodil',async function(req, res){
     var Userdata = req.body;
-  //  await Data.create(Userdata);
+    await Data.create(Userdata);
     res.json({"Message":"Created"});
     });
 app.listen(port,()=>{
