@@ -5,7 +5,6 @@ const vendorsub =async function(req, res){
   }
   const vendorpost =async function(req, res){
     var Userdata = req.body;
-    Userdata.Status="Vendor Submitted";
     await Data.create(Userdata);
     res.json({"Message":"Created"});
     }
