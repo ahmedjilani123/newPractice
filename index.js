@@ -31,5 +31,5 @@ app.post("/userven",UserStatus)
 
 
 app.listen(port,()=>{
-    console.log('listening on');
+    console.log('listening on'+port);
 })

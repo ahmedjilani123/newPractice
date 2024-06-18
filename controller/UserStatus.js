@@ -1,14 +1,16 @@
 const Data = require("../Schema");
 const UserStatus=async (req, res)=>{
     var UserData = req.body;
-    var FindObject = await Data.find(UserData.Supplier_ID);
-    if(UserData.Status =="Approved"){
-     FindObject.Status = "Approved";
-    }else if(UserData.Status =="Reject"){
-          FindObject.Status="Reject"
-    }else if(UserData.Status=="Re-Directed"){
-        FindObject.Status="Re-Directed"
+    let StatusData;
+    if(UserData.Status == "A"){
+        StatusData="Approved";
+    }else if(UserData.Status == "X"){
+        StatusData="Rejected"
+    }else if(UserData.Status== "RR"){
+        StatusData="Re-Routed"
     }
+    await Data.updateOne({Supplier_ID:UserData.Supplier_ID},{$set: {Status:StatusData} })
+    res.status(200).json({Message:"Updated"});
 }
 module.exports ={
     UserStatus,
