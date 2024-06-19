@@ -4,7 +4,7 @@ const env = require("dotenv").config();
 const cors=require("cors");
 const mongoose = require('mongoose');
 
-const { vendorsub, vendorpost } = require('./controller/vendorsub');
+const { vendorsub, vendorpost, updatevendorData } = require('./controller/vendorsub');
 const { SubmitGet, submitPost } = require('./controller/usersubmit');
 const { UserStatus } = require('./controller/UserStatus');
 
@@ -23,9 +23,12 @@ app.use(express.json());
 
 app.get('/vendorsub', vendorsub);
 app.post('/vendorsub',vendorpost);
+
 app.get('/UserSubmit',SubmitGet);
 app.post('/UserSubmit',submitPost);
-app.post("/userven",UserStatus)
+app.post("/moduleStatusChange",UserStatus);
+
+app.put("/updatevendor",updatevendorData)
 
 
 

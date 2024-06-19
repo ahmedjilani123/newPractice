@@ -461,7 +461,20 @@ CheckDigit
     },
     Status:{
         type: String
-    }
+    },
+    AllStatus:[
+        {   
+            NameM:{
+            type: String
+            },
+            mainStatus:{
+                type: String
+            },
+            remark:{
+                type: String
+            }
+        }
+    ]
 
 })
 module.exports = mongoose.model("Vendor", Vendor);
