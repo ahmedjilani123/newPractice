@@ -19,7 +19,8 @@ const UserStatus = async (req, res) => {
     })
     var count = 0;
     allstatus.forEach((getstatus) => {
-        if (StatusData == getstatus.mainStatus) {
+            var firstDet=getstatus.mainStatus.split(" ")[0]
+        if (firstDet == StatusData.split(" ")[0]) {
             count++;
         }
     })
