@@ -1,6 +1,18 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const Vendor = new Schema({
+    Add_Txt_Type:{
+        type:String
+    },
+    Add_Lang:{
+        type:String
+    },
+    Add_Txt_Line:{
+        type:String
+    },
+    Add_Txt_Col:{
+        type:String
+    },
     Address_valid_To
         : {
         type: String
