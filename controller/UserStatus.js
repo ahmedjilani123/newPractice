@@ -3,7 +3,7 @@ const UserStatus = async (req, res) => {
     var UserData = req.body;
     console.log(UserData);
     var getOneData = await Data.findOne({ Supplier_ID: UserData.Supplier_ID });
-    var allstatus = getOneData.AllStatus;
+    var AllStatusM = getOneData.AllStatus;
 
     var StatusData;
     var ArrModule = [{ name: "Payment", fullName: "Finance" }, { name: "General", fullName: "General Department" }, { name: "Technical", fullName: "Legal" }];
@@ -17,31 +17,46 @@ const UserStatus = async (req, res) => {
             })
         }
     })
-    var count = 0;
-    allstatus.forEach((getstatus) => {
-            var firstDet=getstatus.mainStatus.split(" ")[0]
-        if (firstDet == StatusData.split(" ")[0] ) {
-            count++;
-        }
-    })
-    allstatus.forEach((getstatus) => {
-        var firstDet=getstatus.mainStatus.split(" ")[1]
-    if (firstDet == getOneData.Status.split(" ")[1] ) {
-        count=0;
-    }
-})
-
-    if (count == 0) {
+    try{
+        var count = 0;
+        var indexget = undefined;
         getOneData.Status = StatusData;
-        getOneData.AllStatus.push({ remark: UserData.remark, mainStatus: StatusData });
-        console.log(getOneData);
-        await Data.updateOne({ Supplier_ID: UserData.Supplier_ID }, { $set: getOneData })
-        res.status(200).json({ Message: "Updated" });
-    }else{
-        res.status(200).json({ Message: "already update this "+ UserData.NameM });
-    }
+        if(AllStatusM.length === 0){
+            getOneData.AllStatus.push({ remark: UserData.remark, mainStatus: StatusData });
+            await Data.updateOne({ Supplier_ID: UserData.Supplier_ID }, { $set: getOneData });
+            res.status(200).json({ Message: "Updated" } );
+        }else{
+            var moduleNames = UserData.NameM == "Payment" ? "Finance" : UserData.NameM;
+            AllStatusM.forEach((element, i) => {
+                if (element.mainStatus.includes(moduleNames)) {
+                    count++;
+                    if (element.mainStatus.includes("Initialize")) {
+                        indexget = i;
+                    }
+                }
+            });
+    
+        }
+        if (indexget >= 0) {
+            getOneData.AllStatus.splice(indexget,1);
+            getOneData.AllStatus.push({ remark: UserData.remark, mainStatus: StatusData }); 
+            await Data.updateOne({ Supplier_ID: UserData.Supplier_ID }, { $set: getOneData });
+            res.status(200).json({ Message: "Updated" } ); 
+        }
+        if (count == 0) {
+            getOneData.AllStatus.push({ remark: UserData.remark, mainStatus: StatusData });
+            await Data.updateOne({ Supplier_ID: UserData.Supplier_ID }, { $set: getOneData });
+            res.status(200).json({ Message: "Updated" } );
+        }else{
+            res.status(200).json({ Message: "already create this " + UserData.NameM });
+            return
+        }
+    }catch(e){
 
+    }
+  
 }
+
 module.exports = {
     UserStatus,
 }
