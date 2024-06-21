@@ -42,6 +42,7 @@ const UserStatus = async (req, res) => {
             getOneData.AllStatus.push({ remark: UserData.remark, mainStatus: StatusData }); 
             await Data.updateOne({ Supplier_ID: UserData.Supplier_ID }, { $set: getOneData });
             res.status(200).json({ Message: "Updated" } ); 
+            return;
         }
         if (count == 0) {
             getOneData.AllStatus.push({ remark: UserData.remark, mainStatus: StatusData });
