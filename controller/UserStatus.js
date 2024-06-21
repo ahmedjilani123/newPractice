@@ -20,10 +20,17 @@ const UserStatus = async (req, res) => {
     var count = 0;
     allstatus.forEach((getstatus) => {
             var firstDet=getstatus.mainStatus.split(" ")[0]
-        if (firstDet == StatusData.split(" ")[0]) {
+        if (firstDet == StatusData.split(" ")[0] ) {
             count++;
         }
     })
+    allstatus.forEach((getstatus) => {
+        var firstDet=getstatus.mainStatus.split(" ")[1]
+    if (firstDet == getOneData.Status.split(" ")[1] ) {
+        count=0;
+    }
+})
+
     if (count == 0) {
         getOneData.Status = StatusData;
         getOneData.AllStatus.push({ remark: UserData.remark, mainStatus: StatusData });
